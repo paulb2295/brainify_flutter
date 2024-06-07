@@ -1,11 +1,16 @@
+import 'package:brainify_flutter/utils/enums/roles_enum.dart';
 import 'package:brainify_flutter/views/pages/main_page_instructor.dart';
+import 'package:brainify_flutter/views/pages/main_page_student.dart';
 import 'package:brainify_flutter/views/pages/register_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/auth_request.dart';
+import '../../models/user.dart';
 import '../../view_models/auth_viewmodel.dart';
 import '../components/rounded_button.dart';
 
@@ -89,7 +94,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Theme.of(context).colorScheme.onPrimaryContainer,
                       title: 'Log In',
                       onPressed: () async {
-                        //_loginRequest();
                         AuthRequest req =
                             AuthRequest(email: email, password: password);
                         await authViewModel.login(req);
@@ -100,9 +104,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         } else if (authViewModel.authState ==
                                 AuthState.authenticated &&
                             context.mounted) {
+                          final SharedPreferences prefs = await SharedPreferences.getInstance();
+                          final String? token = prefs.getString('token');
+                          if(token != null){
+                            Map<String, dynamic> decodedToken =  JwtDecoder.decode(token);
+                            User user = User.fromJson(decodedToken);
+                          if(!context.mounted){return;}
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (ctx) => const InstructorMainPage()));
-                        }
+                              builder: (ctx) =>  user.role == Role.STUDENT ?
+                          const StudentMainPage() :
+                          const InstructorMainPage()));
+                        }}
                       }),
                   RoundedButton(
                       color: Theme.of(context).colorScheme.primary,

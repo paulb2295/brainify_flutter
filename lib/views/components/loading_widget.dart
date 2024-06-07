@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({super.key, required this.message});
@@ -11,13 +12,15 @@ class LoadingWidget extends StatelessWidget {
         children: [
           Text(
             message,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16.0,
-              fontWeight: FontWeight.w500
+              fontWeight: FontWeight.w500,
+              color: Theme.of(context).colorScheme.primary
             ),
           ),
-          const CupertinoActivityIndicator(
-            radius: 25.0,
+           CupertinoActivityIndicator(
+            radius: 30.0,
+            color: Theme.of(context).colorScheme.primary,
           )
         ],
       ),

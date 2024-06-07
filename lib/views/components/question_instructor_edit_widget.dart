@@ -76,7 +76,7 @@ class _QuestionInstructorEditWidgetState extends State<QuestionInstructorEditWid
             TextField(
               controller: _questionBodyController,
               decoration: const InputDecoration(labelText: 'Question'),
-              maxLines: 3,
+              maxLines: 2,
             ),
             const SizedBox(height: 16),
             AnswerTile(

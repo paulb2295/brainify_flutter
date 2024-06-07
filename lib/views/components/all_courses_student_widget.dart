@@ -1,5 +1,6 @@
 import 'package:brainify_flutter/view_models/course_student_viewmodel.dart';
 import 'package:brainify_flutter/views/components/course_student_widget.dart';
+import 'package:brainify_flutter/views/components/exception_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +34,7 @@ class _AllCoursesStudentWidgetState
     courses = context.watch<CourseStudentViewModel>().courses;
     coursesList = context.watch<CourseStudentViewModel>().coursesState ==
         CoursesState.error
-        ? ErrorWidget(context.read()<CourseStudentViewModel>().errorMessage)
+        ? ExceptionWidget(errorMessage:  context.read<CourseStudentViewModel>().errorMessage)
         : Scaffold(
       backgroundColor: const Color.fromARGB(190, 40, 42, 53),
       body: ListView.builder(

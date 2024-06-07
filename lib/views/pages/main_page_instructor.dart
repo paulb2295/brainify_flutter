@@ -1,5 +1,6 @@
 import 'package:brainify_flutter/views/components/all_courses_instructor_widget.dart';
 import 'package:brainify_flutter/views/components/all_modules_instructor_widget.dart';
+import 'package:brainify_flutter/views/components/app_bar_instructor_widget.dart';
 import 'package:flutter/material.dart';
 import '../../models/course.dart';
 import '../components/gpt_chat_widget.dart';
@@ -16,6 +17,7 @@ class _InstructorMainPageState extends State<InstructorMainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const InstructorAppBarWidget(),
       body: Row(
         children: [
           Expanded(

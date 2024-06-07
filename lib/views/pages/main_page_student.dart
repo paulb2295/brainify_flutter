@@ -1,5 +1,6 @@
 import 'package:brainify_flutter/views/components/all_courses_student_widget.dart';
 import 'package:brainify_flutter/views/components/all_modules_student_widget.dart';
+import 'package:brainify_flutter/views/components/app_bar_student_widget.dart';
 import 'package:brainify_flutter/views/components/gpt_chat_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +14,11 @@ class StudentMainPage extends StatefulWidget {
 }
 
 class _StudentMainPageState extends State<StudentMainPage> {
-  late Course? selectedCourse;
+  Course? selectedCourse;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const StudentAppBarWidget(),
       body: Row(
         children: [
           Expanded(

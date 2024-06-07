@@ -247,7 +247,7 @@ class ModulesInstructorRepository {
   Future<DataState> generateQuestions(
       Module module, int courseId, int questionNumber) async {
     final url = Uri.http(
-        kBaseUrl, '${module.id}/$courseId?questionNumber=$questionNumber');
+        kBaseUrl, '$kGenerateQuestionsForModule${module.id}/$courseId/$questionNumber');
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('token');
     List<Question> questions = [];
@@ -260,9 +260,10 @@ class ModulesInstructorRepository {
         },
       );
       final dynamic dynamicResponse = jsonDecode(response.body);
-
       if (response.statusCode == HttpStatus.ok ||
           response.statusCode == HttpStatus.created) {
+        final List<dynamic> dynamicResponse = jsonDecode(utf8.decode(response.bodyBytes));
+
         List<Map<String, dynamic>> listData = dynamicResponse.map((item) {
           return Map<String, dynamic>.from(item);
         }).toList();
@@ -277,6 +278,12 @@ class ModulesInstructorRepository {
             Map<String, dynamic>.from(dynamicResponse);
         return DataFailure<String>(
             exception: mapResponse['message'], code: HttpStatus.badRequest);
+      }
+      else if (response.statusCode == HttpStatus.serviceUnavailable) {
+        final Map<String, dynamic> mapResponse =
+        Map<String, dynamic>.from(dynamicResponse);
+        return DataFailure<String>(
+            exception: mapResponse['message'], code: HttpStatus.serviceUnavailable);
       }
       return DataFailure<String>(
           exception: 'Connection with server failed. Try again!',

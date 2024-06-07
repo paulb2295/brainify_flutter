@@ -4,6 +4,7 @@ import 'package:brainify_flutter/views/components/course_instructor_widget.dart'
 import 'package:brainify_flutter/views/components/exception_widget.dart';
 import 'package:brainify_flutter/views/components/loading_widget.dart';
 import 'package:brainify_flutter/views/components/module_instructor_add_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -50,7 +51,7 @@ class _AllCoursesInstructorWidgetState
             CoursesState.error
         ? ExceptionWidget(errorMessage: context.read<CourseInstructorViewModel>().errorMessage)
         : Scaffold(
-            backgroundColor: Color.fromARGB(190, 40, 42, 53),
+            backgroundColor: Color.fromARGB(255, 231, 233, 235),
             body: ListView.builder(
               itemCount: courses.length,
               itemBuilder: (context, index) {
@@ -73,26 +74,32 @@ class _AllCoursesInstructorWidgetState
           );
     return Column(
       children: [
-         Row(
-          children: [
-            const Text(
-              'Cursurile Mele',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16.0,
-                fontWeight: FontWeight.w600
-              ),
-            ),
-            const Spacer(),
-            TextButton(
-                onPressed: (){
-                  _openAddCourseOverlay();
-                },
-                child: const Text( 'Adaugă Curs'),
-            ),
-          ],
-        ),
-        coursesList,
+         Container(
+           color: Color.fromARGB(255, 231, 233, 235),
+           child: Padding(
+             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+             child: Row(
+              children: [
+                const Text(
+                  'Cursurile Mele',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
+                const Spacer(),
+                TextButton(
+                    onPressed: (){
+                      _openAddCourseOverlay();
+                    },
+                    child: const Text( 'Adaugă Curs'),
+                ),
+              ],
+                     ),
+           ),
+         ),
+        Expanded (child: coursesList),
       ],
     );
   }

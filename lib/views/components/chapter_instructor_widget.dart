@@ -26,7 +26,6 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
       const LoadingWidget(message: 'Chapter content loading');
 
   final _questionsNumberController = TextEditingController();
-  String _questionsNumberText = '0';
   void _generateQuestions(Chapter chapter){
     if(double.tryParse(_questionsNumberController.text) == null ||
         double.tryParse(_questionsNumberController.text)! < 1){
@@ -64,11 +63,6 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
           .read<ModuleInstructorViewModel>()
           .getChapterForModule(widget.module);
     });
-    _questionsNumberController.addListener(() {
-      setState(() {
-        _questionsNumberText = _questionsNumberController.text;
-      });
-    });
   }
 
   @override
@@ -79,7 +73,6 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
 
   @override
   Widget build(BuildContext context) {
-    _questionsNumberController.text = '0';
     Chapter chapter = context.watch<ModuleInstructorViewModel>().chapter;
     displayChapter = context.read<ModuleInstructorViewModel>().modulesState ==
             ModulesState.error
@@ -161,20 +154,23 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 child: TextField(
                   controller: _questionsNumberController,
                   keyboardType: TextInputType.number,
+                  maxLength: 3,
                   decoration: const InputDecoration(
                     label: Text('Number of questions to generate'),
-                    prefixText: 'Q ',
+                    prefixText: 'Q: ',
                   ),
                 ),
               ),
+              const SizedBox(width: 14,),
               RoundedButton(
                 color: Theme.of(context).primaryColor,
-                title: 'Generate ${_questionsNumberText.isEmpty ? 0 : _questionsNumberText} questions',
+                title: 'Generate questions',
                 onPressed: () {
                   _generateQuestions(chapter);
                 },

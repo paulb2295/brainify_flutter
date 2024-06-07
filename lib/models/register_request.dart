@@ -19,4 +19,14 @@ class RegisterRequest {
       'lastName' : lastName,
     };
   }
+
+  factory RegisterRequest.fromJson(Map<String, dynamic> json) {
+    return RegisterRequest(
+      email: json['email'],
+      password: json['password'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      role: json['role'] == 'ADMIN'? Role.ADMIN : (json['role'] == 'INSTRUCTOR'? Role.INSTRUCTOR : Role.STUDENT)
+    );
+  }
 }

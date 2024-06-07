@@ -1,4 +1,5 @@
 import 'package:brainify_flutter/views/components/rounded_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,19 +10,18 @@ import 'exception_widget.dart';
 import 'loading_widget.dart';
 
 class ModuleInstructorAddWidget extends StatefulWidget {
-  const ModuleInstructorAddWidget(
-      {super.key,  required this.course});
-
+  const ModuleInstructorAddWidget({super.key, required this.course});
 
   final Course course;
 
   @override
-  State<ModuleInstructorAddWidget> createState() => _ChapterInstructorViewState();
+  State<ModuleInstructorAddWidget> createState() =>
+      _ChapterInstructorViewState();
 }
 
 class _ChapterInstructorViewState extends State<ModuleInstructorAddWidget> {
   Widget displayChapter =
-  const LoadingWidget(message: 'Chapter content loading');
+      const LoadingWidget(message: 'Chapter content loading');
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
@@ -87,14 +87,9 @@ class _ChapterInstructorViewState extends State<ModuleInstructorAddWidget> {
 
   @override
   Widget build(BuildContext context) {
-  _titleController.text = '';
-  _contentController.text = '';
-    displayChapter = context.read<ModuleInstructorViewModel>().modulesState ==
-        ModulesState.error
-        ? ExceptionWidget(
-        errorMessage:
-        context.read<ModuleInstructorViewModel>().errorMessage)
-        : SingleChildScrollView(
+    _titleController.text = '';
+    _contentController.text = '';
+    displayChapter = SingleChildScrollView(
       child: Column(
         children: [
           Padding(
@@ -111,31 +106,29 @@ class _ChapterInstructorViewState extends State<ModuleInstructorAddWidget> {
               ),
             ),
           ),
-          Row(
-            children: [
-              const Expanded(
-                flex: 1,
-                child: SizedBox(),
-              ),
-              Expanded(
-                flex: 4,
-                child: TextField(
-                  controller: _contentController,
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
-                  decoration: const InputDecoration(
-                    label: Text('Chapter Content'),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SizedBox(
+              height: 400,
+              child: TextField(
+                controller: _contentController,
+                maxLines: null,
+                expands: true,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400),
+                decoration: const InputDecoration(
+                  label: Text(
+                    'Chapter Content',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ),
-              const Expanded(
-                flex: 1,
-                child: SizedBox(),
-              )
-            ],
-          )
+            ),
+          ),
         ],
       ),
     );

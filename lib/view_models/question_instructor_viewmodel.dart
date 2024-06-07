@@ -6,6 +6,7 @@ import '../repositories/modules_instructor_repository.dart';
 import '../utils/data_state.dart';
 
 enum QuestionsState { initial, loading, success, error }
+enum QuestionsGenerationState { initial, loading, success, error }
 class QuestionInstructorViewModel with ChangeNotifier{
 
   final ModulesInstructorRepository _modulesInstructorRepository;
@@ -13,16 +14,20 @@ class QuestionInstructorViewModel with ChangeNotifier{
   QuestionInstructorViewModel(this._modulesInstructorRepository);
 
   QuestionsState _questionsState = QuestionsState.initial;
+  QuestionsGenerationState _questionsGenerationState = QuestionsGenerationState.initial;
   bool _loading = false;
   String _errorMessage = '';
   List<Question> _questions = [];
+  List<Question> _generatedQuestions = [];
   late Module? _module;
 
   //getters
   bool get loading => _loading;
   String get errorMessage => _errorMessage;
   QuestionsState get questionState => _questionsState;
+  QuestionsGenerationState get questionGenerationState => _questionsGenerationState;
   List<Question> get questions => _questions;
+  List<Question> get generatedQuestions => _generatedQuestions;
 
   // mandatory to call before use of any function !!!
   Future<void> initialize(Module module) async {
@@ -40,18 +45,23 @@ class QuestionInstructorViewModel with ChangeNotifier{
   }
 
   void generateQuestions(Chapter chapter, int courseId, int questionNumber) async {
-    _questionsState = QuestionsState.loading;
+    _questionsGenerationState = QuestionsGenerationState.loading;
     setLoading(true);
     DataState response = await _modulesInstructorRepository.generateQuestions(
          _module!, courseId, questionNumber );
     if (response is DataSuccess) {
-      _questionsState = QuestionsState.success;
-      setQuestions(response.data);
+      _questionsGenerationState = QuestionsGenerationState.success;
+      setGeneratedQuestions(response.data);
     } else if (response is DataFailure) {
-      _questionsState = QuestionsState.error;
+      _questionsGenerationState = QuestionsGenerationState.error;
       _errorMessage = response.exception.toString();
     }
     setLoading(false);
+  }
+
+  setGeneratedQuestions(List<Question> questions) {
+    _generatedQuestions = questions;
+    notifyListeners();
   }
 
   void saveGenerateQuestions(List<Question> questions) async {
@@ -67,6 +77,7 @@ class QuestionInstructorViewModel with ChangeNotifier{
     }
     setLoading(false);
   }
+
 
   getQuestions() async {
     setLoading(true);
