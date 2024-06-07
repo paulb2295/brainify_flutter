@@ -1,4 +1,5 @@
 import 'package:brainify_flutter/utils/enums/roles_enum.dart';
+import 'package:brainify_flutter/views/pages/main_page_admin.dart';
 import 'package:brainify_flutter/views/pages/main_page_instructor.dart';
 import 'package:brainify_flutter/views/pages/main_page_student.dart';
 import 'package:brainify_flutter/views/pages/register_page.dart';
@@ -104,17 +105,24 @@ class _LoginScreenState extends State<LoginScreen> {
                         } else if (authViewModel.authState ==
                                 AuthState.authenticated &&
                             context.mounted) {
-                          final SharedPreferences prefs = await SharedPreferences.getInstance();
+                          final SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
                           final String? token = prefs.getString('token');
-                          if(token != null){
-                            Map<String, dynamic> decodedToken =  JwtDecoder.decode(token);
+                          if (token != null) {
+                            Map<String, dynamic> decodedToken =
+                                JwtDecoder.decode(token);
                             User user = User.fromJson(decodedToken);
-                          if(!context.mounted){return;}
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (ctx) =>  user.role == Role.STUDENT ?
-                          const StudentMainPage() :
-                          const InstructorMainPage()));
-                        }}
+                            if (!context.mounted) {
+                              return;
+                            }
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (ctx) => user.role == Role.ADMIN
+                                    ? const AdminMainPage()
+                                    : (user.role == Role.INSTRUCTOR
+                                        ? const InstructorMainPage()
+                                        : const StudentMainPage())));
+                          }
+                        }
                       }),
                   RoundedButton(
                       color: Theme.of(context).colorScheme.primary,

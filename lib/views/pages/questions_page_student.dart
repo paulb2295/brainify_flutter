@@ -111,7 +111,6 @@ import '../components/rounded_button.dart';
 //   }
 // }
 
-
 class QuestionsPageStudent extends StatefulWidget {
   const QuestionsPageStudent({super.key, required this.module});
   final Module module;
@@ -149,19 +148,21 @@ class _QuestionsPageStudentState extends State<QuestionsPageStudent> {
   @override
   Widget build(BuildContext context) {
     questions = context.watch<QuestionStudentViewModel>().questions;
-    questionsList = context.read<QuestionStudentViewModel>().questionState == QuestionsState.error
+    questionsList = context.read<QuestionStudentViewModel>().questionState ==
+            QuestionsState.error
         ? ErrorWidget(context.read<QuestionStudentViewModel>().errorMessage)
-        : (context.read<QuestionStudentViewModel>().questionState == QuestionsState.loading
-        ? const LoadingWidget(message: 'Loading Questions')
-        : ListView.builder(
-      itemCount: questions.length,
-      itemBuilder: (context, index) {
-        return QuestionStudentWidget(
-          question: questions[index],
-          onScoreCalculated: (score) => _updateScore(index, score),
-        );
-      },
-    ));
+        : (context.read<QuestionStudentViewModel>().questionState ==
+                QuestionsState.loading
+            ? const LoadingWidget(message: 'Loading Questions')
+            : ListView.builder(
+                itemCount: questions.length,
+                itemBuilder: (context, index) {
+                  return QuestionStudentWidget(
+                    question: questions[index],
+                    onScoreCalculated: (score) => _updateScore(index, score),
+                  );
+                },
+              ));
 
     return Scaffold(
       body: Column(
@@ -169,7 +170,9 @@ class _QuestionsPageStudentState extends State<QuestionsPageStudent> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: Text(
-              calculatePressed ? 'Total Score: $totalScore/${questions.length * 5}' : '',
+              calculatePressed
+                  ? 'Total Score: $totalScore/${questions.length * 5}'
+                  : '',
               style: TextStyle(
                 fontSize: 18.0,
                 color: Theme.of(context).primaryColor,

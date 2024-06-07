@@ -8,7 +8,8 @@ const kTokenVerification = '/api/auth/token'; //DONE //*
 const kRefreshToken = '/api/auth/refresh-token';  // ~
 //user endpoints
 const kChangePassword = '/api/users/password'; //~
-const kChangeRole = '/api/users/role/'; // {userId}  //*
+const kGetAllUsers = '/api/users';
+const kChangeRole = '/api/users/role'; // DONE //*
 //chapter endpoints
 const kVectorSearch = '/api/chapters/similar'; //DONE //*
 //course endpoints
