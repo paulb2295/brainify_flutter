@@ -87,7 +87,7 @@ class ModulesInstructorRepository {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token'
       });
-      final dynamic dynamicResponse = jsonDecode(utf8.decode(response.bodyBytes));;
+      final dynamic dynamicResponse = jsonDecode(utf8.decode(response.bodyBytes));
       final Map<String, dynamic> mapResponse =
           Map<String, dynamic>.from(dynamicResponse);
       if (response.statusCode == HttpStatus.ok) {
@@ -143,7 +143,6 @@ class ModulesInstructorRepository {
       });
 
       final dynamic dynamicResponse = jsonDecode(response.body);
-
       if (response.statusCode == HttpStatus.ok) {
         final List<dynamic> dynamicResponse = jsonDecode(utf8.decode(response.bodyBytes));
 

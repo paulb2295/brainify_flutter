@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '../../models/course.dart';
 
@@ -43,17 +44,26 @@ class CourseInstructorWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.add, color: Colors.blueAccent),
-                    onPressed: onEdit,
+                  Tooltip(
+                    message: 'Add Chapters',
+                    child: IconButton(
+                      icon: const Icon(Icons.add, color: Colors.blueAccent),
+                      onPressed: onEdit,
+                    ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
-                    onPressed: onDelete,
+                  Tooltip(
+                    message: 'Delete Course',
+                    child: IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.red),
+                      onPressed: onDelete,
+                    ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.visibility, color: Colors.green),
-                    onPressed: onView,
+                  Tooltip(
+                    message: 'View Course Chapters',
+                    child: IconButton(
+                      icon: const Icon(Icons.visibility, color: Colors.green),
+                      onPressed: onView,
+                    ),
                   ),
                 ],
               ),

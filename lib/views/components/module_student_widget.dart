@@ -33,9 +33,12 @@ class ModuleStudentWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16.0),
-            IconButton(
-              icon: const Icon(Icons.visibility, color: Colors.green),
-              onPressed: onView,
+            Tooltip(
+              message: 'View Chapter Content',
+              child: IconButton(
+                icon: const Icon(Icons.visibility, color: Colors.green),
+                onPressed: onView,
+              ),
             ),
           ],
         ),

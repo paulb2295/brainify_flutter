@@ -6,7 +6,7 @@ class Course {
 
    factory Course.fromJson(Map<String, dynamic> map){
      return Course(
-         id : map['id'] ?? 0,
+         id : map['id'],
          courseName: map['courseName'] ?? ''
      );
    }

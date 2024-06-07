@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '../../models/course.dart';
 import '../../models/module.dart';
@@ -37,17 +38,26 @@ class ModuleInstructorWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16.0),
-            IconButton(
-              icon: const Icon(Icons.edit, color: Colors.blueAccent),
-              onPressed: onEdit,
+            Tooltip(
+              message: 'Add Chapter content',
+              child: IconButton(
+                icon: const Icon(Icons.edit, color: Colors.blueAccent),
+                onPressed: onEdit,
+              ),
             ),
-            IconButton(
-              icon: const Icon(Icons.delete, color: Colors.red),
-              onPressed: onDelete,
+            Tooltip(
+              message: 'Delete Chapter',
+              child: IconButton(
+                icon: const Icon(Icons.delete, color: Colors.red),
+                onPressed: onDelete,
+              ),
             ),
-            IconButton(
-              icon: const Icon(Icons.visibility, color: Colors.green),
-              onPressed: onView,
+            Tooltip(
+              message: 'View Chapter content',
+              child: IconButton(
+                icon: const Icon(Icons.visibility, color: Colors.green),
+                onPressed: onView,
+              ),
             ),
           ],
         ),

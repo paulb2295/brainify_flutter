@@ -75,7 +75,7 @@ class _AllCoursesInstructorWidgetState
     return Column(
       children: [
          Container(
-           color: Color.fromARGB(255, 231, 233, 235),
+           color: const Color.fromARGB(255, 231, 233, 235),
            child: Padding(
              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
              child: Row(

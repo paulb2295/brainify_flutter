@@ -20,7 +20,7 @@ class ModuleStudentViewModel with ChangeNotifier{
   bool _loading = false;
   String _errorMessage = '';
   List<Module> _modules = [];
-  late Chapter? _chapter;
+  Chapter _chapter = Chapter(title: '', content: '');
   late Course? _course;
 
   //getters
@@ -28,7 +28,7 @@ class ModuleStudentViewModel with ChangeNotifier{
   String get errorMessage => _errorMessage;
   ModulesState get modulesState => _modulesState;
   List<Module> get modules => _modules;
-  Chapter get chapter => _chapter!;
+  Chapter get chapter => _chapter;
 
   void setLoading(bool loading) {
     _loading = loading;
@@ -93,6 +93,6 @@ class ModuleStudentViewModel with ChangeNotifier{
     _errorMessage = '';
     _modules = [];
     _course = null;
-    _chapter = null;
+    _chapter = Chapter(title: '', content: '');
   }
 }

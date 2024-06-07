@@ -17,14 +17,16 @@ class CourseStudentViewModel with ChangeNotifier {
   CoursesState _coursesState = CoursesState.initial;
   bool _loading = false;
   String _errorMessage = '';
-  List<Course> _courses = [];
+  List<Course> _myCourses = [];
+  List<Course> _allCourses = [];
 
 
   //getters
   bool get loading => _loading;
   String get errorMessage => _errorMessage;
   CoursesState get coursesState => _coursesState;
-  List<Course> get courses => _courses;
+  List<Course> get myCourses => _myCourses;
+  List<Course> get allCourses => _allCourses;
 
   void setLoading(bool loading) {
     _loading = loading;
@@ -47,7 +49,7 @@ class CourseStudentViewModel with ChangeNotifier {
       var response = await _courseStudentRepository.getAllAvailableCourses();
       if (response is DataSuccess) {
         _coursesState = CoursesState.success;
-        setCourses(response.data);
+        setAllCourses(response.data);
       } else if (response is DataFailure) {
         _coursesState = CoursesState.error;
         _errorMessage = response.exception.toString();
@@ -57,7 +59,22 @@ class CourseStudentViewModel with ChangeNotifier {
   }
 
   setCourses(List<Course> courses) {
-    _courses = courses;
+    _myCourses = courses;
     notifyListeners();
+  }
+
+  setAllCourses(List<Course> courses) {
+    _allCourses = courses;
+    notifyListeners();
+  }
+
+  enrolToCourse(Course course) async{
+    var response = await _courseStudentRepository.enrollToCourse(course);
+    if (response is DataSuccess) {
+      _coursesState = CoursesState.success;
+    } else if (response is DataFailure) {
+      _coursesState = CoursesState.error;
+      _errorMessage = response.exception.toString();
+    }
   }
 }

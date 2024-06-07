@@ -23,9 +23,9 @@ class GptFuncRepository {
             'Authorization': 'Bearer $token'
           },
           body: json.encode(gptInput.toJson()));
-      final dynamic dynamicResponse = jsonDecode(response.body);
+      final  dynamic dynamicResponse = jsonDecode(utf8.decode(response.bodyBytes));
       final Map<String, dynamic> mapResponse =
-          Map<String, dynamic>.from(dynamicResponse);
+      Map<String, dynamic>.from(dynamicResponse[0]);
       if (response.statusCode == HttpStatus.ok) {
         Chapter chapter = Chapter.fromJson(mapResponse);
         return DataSuccess<Chapter>(code: HttpStatus.ok, data: chapter);
@@ -139,16 +139,17 @@ class GptFuncRepository {
             'Authorization': 'Bearer $token'
           },
           body: json.encode(gptInput.toJson()));
-      final dynamic dynamicResponse = jsonDecode(response.body);
-      final String botResponse = dynamicResponse.toString();
+      final String botResponse = response.body.toString();
       if (response.statusCode == HttpStatus.ok) {
         return DataSuccess<String>(code: HttpStatus.ok, data: botResponse);
       } else if (response.statusCode == HttpStatus.badRequest) {
+        final dynamic dynamicResponse = jsonDecode(response.body);
         final Map<String, dynamic> mapResponse =
             Map<String, dynamic>.from(dynamicResponse);
         return DataFailure<String>(
             exception: mapResponse['message'], code: HttpStatus.badRequest);
       } else if (response.statusCode == HttpStatus.notFound) {
+        final dynamic dynamicResponse = jsonDecode(response.body);
         final Map<String, dynamic> mapResponse =
             Map<String, dynamic>.from(dynamicResponse);
         return DataFailure<String>(

@@ -85,7 +85,7 @@ class ModuleStudentRepository{
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token'
       });
-      final dynamic dynamicResponse = jsonDecode(response.body);
+      final dynamic dynamicResponse = jsonDecode(utf8.decode(response.bodyBytes));
       final Map<String, dynamic> mapResponse =
       Map<String, dynamic>.from(dynamicResponse);
       if (response.statusCode == HttpStatus.ok) {
@@ -129,7 +129,7 @@ class ModuleStudentRepository{
   //get questions for specific module
   Future<DataState> getQuestionsForModule(Module module) async {
     final url =
-    Uri.http(kBaseUrl, '$kGetQuestionsForSpecificModule${module.id}');
+    Uri.http(kBaseUrl, '$kGetQuestionsForSpecificModule${module.id}/0');
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('token');
     List<Question> questions = [];

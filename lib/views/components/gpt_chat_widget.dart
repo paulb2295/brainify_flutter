@@ -1,7 +1,9 @@
 import 'package:brainify_flutter/view_models/gpt_viewmodel.dart';
+import 'package:brainify_flutter/views/components/loading_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 
 class ChatPage extends StatefulWidget {
   @override
@@ -15,7 +17,6 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-    // Add a listener to the GptViewModel
     context.read<GptViewModel>().addListener(_gptMessageListener);
   }
 
@@ -29,29 +30,29 @@ class _ChatPageState extends State<ChatPage> {
 
   void _gptMessageListener() {
     final gptViewModel = context.read<GptViewModel>();
-    if (gptViewModel.gptState == GPTState.success &&
-        gptViewModel.gptMessage.isNotEmpty) {
+    if (gptViewModel.chatState == ChatState.success && gptViewModel.gptMessage.isNotEmpty) {
       setState(() {
         _messages.add({
-          'user': _controller.text,
+          'user': gptViewModel.currentUserMessage,
           'response': gptViewModel.gptMessage,
         });
-        _controller.clear();
       });
-    } else if (gptViewModel.gptState == GPTState.error) {
+    } else if (gptViewModel.chatState == ChatState.error) {
       setState(() {
         _messages.add({
-          'user': _controller.text,
+          'user': gptViewModel.currentUserMessage,
           'response': gptViewModel.errorMessage,
         });
-        _controller.clear();
       });
     }
   }
 
-  void _sendMessage() {
+  void _sendMessage() async {
     if (_controller.text.isNotEmpty) {
-      context.read<GptViewModel>().chatBot(_controller.text);
+      final message = _controller.text;
+      context.read<GptViewModel>().setCurrentUserMessage(message);
+      _controller.clear();
+      await context.read<GptViewModel>().chatBot(message);
     }
   }
 
@@ -59,7 +60,9 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 231, 233, 235),
-      body: Column(
+      body: context.watch<GptViewModel>().chatState == ChatState.loading ?
+      const LoadingWidget(message: 'Generating Response') :
+      Column(
         children: [
           Expanded(
             child: ListView.builder(
@@ -76,16 +79,18 @@ class _ChatPageState extends State<ChatPage> {
                         children: [
                           Text(
                             'Q: ${_messages[index]['user']}',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color.fromARGB(190, 40, 42, 53)),
+                            style:  TextStyle(
+                              fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Theme.of(context).primaryColor,)
                           ),
                           const SizedBox(height: 5),
                           Text(
                             'A: ${_messages[index]['response']}',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color.fromARGB(190, 40, 42, 53)),
+                            style:  TextStyle(
+                              fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Theme.of(context).colorScheme.primary),
                           ),
                         ],
                       ),
@@ -105,7 +110,7 @@ class _ChatPageState extends State<ChatPage> {
                       fontWeight: FontWeight.w400,
                     ),
                     controller: _controller,
-                    decoration:  const InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Enter your message',
                       border: OutlineInputBorder(),
                     ),
@@ -116,12 +121,12 @@ class _ChatPageState extends State<ChatPage> {
                   onPressed: _sendMessage,
                   icon: context.watch<GptViewModel>().loading
                       ? CupertinoActivityIndicator(
-                          color: Theme.of(context).colorScheme.primary,
-                        )
+                    color: Theme.of(context).colorScheme.primary,
+                  )
                       : Icon(
-                          Icons.send,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                    Icons.send,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ],
             ),

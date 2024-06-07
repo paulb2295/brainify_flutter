@@ -1,17 +1,29 @@
+import 'package:brainify_flutter/view_models/course_student_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/course.dart';
 
-class CourseStudentWidget extends StatelessWidget {
+class CourseStudentWidget extends StatefulWidget {
   final Course course;
   final VoidCallback onView;
+  final bool enrolled;
+  final bool access;
 
   const CourseStudentWidget({
     Key? key,
     required this.course,
     required this.onView,
+    required this.enrolled,
+    required this.access,
   }) : super(key: key);
 
+  @override
+  State<CourseStudentWidget> createState() => _CourseStudentWidgetState();
+}
+
+class _CourseStudentWidgetState extends State<CourseStudentWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -21,19 +33,40 @@ class CourseStudentWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Icon(Icons.my_library_books_rounded, size: 40.0, color: Colors.blue),
+            const Icon(Icons.my_library_books_rounded,
+                size: 40.0, color: Colors.blue),
             const SizedBox(width: 16.0),
             Expanded(
               child: Text(
-                course.courseName,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                widget.course.courseName,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(width: 16.0),
-            IconButton(
-              icon: const Icon(Icons.visibility, color: Colors.green),
-              onPressed: onView,
-            ),
+            widget.access
+                ? Tooltip(
+                    message: 'View Course Chapters',
+                    child: IconButton(
+                      icon: const Icon(Icons.visibility, color: Colors.green),
+                      onPressed: widget.onView,
+                    ),
+                  )
+                : const Text(''),
+            widget.enrolled
+                ? const Text('')
+                : Tooltip(
+                    message: 'Enroll',
+                    child: IconButton(
+                      icon: const Icon(Icons.add_box_sharp,
+                          color: Colors.blueAccent),
+                      onPressed: () {
+                        context
+                            .read<CourseStudentViewModel>()
+                            .enrolToCourse(widget.course);
+                      },
+                    ),
+                  ),
           ],
         ),
       ),
