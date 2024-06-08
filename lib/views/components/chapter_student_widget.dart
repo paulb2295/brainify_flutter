@@ -152,6 +152,7 @@ class _ChapterStudentViewState extends State<ChapterStudentView> {
                   Navigator.of(context).pop();
                 },
               ),
+              const SizedBox(width: 4,),
               context.watch<GptViewModel>().summarizeState == SummarizeState.loading
                   ? IconButton(
                       onPressed: () {},
@@ -184,6 +185,7 @@ class _ChapterStudentViewState extends State<ChapterStudentView> {
                         }
                       },
                     )),
+              const SizedBox(width: 4,),
               RoundedButton(
                 color: Theme.of(context).primaryColor,
                 title: 'Test Yourself',

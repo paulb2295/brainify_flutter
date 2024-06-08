@@ -5,45 +5,44 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../pages/login_page.dart';
 
-class InstructorAppBarWidget extends StatelessWidget implements PreferredSizeWidget{
+class InstructorAppBarWidget extends StatelessWidget
+    implements PreferredSizeWidget {
   const InstructorAppBarWidget({super.key});
 
-  Future<void> logout() async{
+  Future<void> logout() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('token');
-
   }
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Theme.of(context).colorScheme.primary,
       title: const Text(
         'Brainify Instructor',
         style: TextStyle(
-          fontWeight: FontWeight.w400,
-          fontSize: 18,
-          color: Colors.white
-        ),
+            fontWeight: FontWeight.w400, fontSize: 18, color: Colors.white),
       ),
       actions: [
         IconButton(
-            onPressed: (){
-              logout().then((_) {
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (ctx) => const MyAppWrapper()),
-                      (route) => false,
-                );
-              });
-            },
-            icon: Icon(
-                Icons.logout,
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
+          onPressed: () {
+            logout().then((_) {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (ctx) => const MyAppWrapper()),
+                (route) => false,
+              );
+            });
+          },
+          icon: Icon(
+            Icons.logout,
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
         ),
       ],
     );
   }
+
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

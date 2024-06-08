@@ -133,13 +133,14 @@ class CourseInstructorRepository {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer $token'
           });
-      final dynamic dynamicResponse = jsonDecode(response.body);
-      final Map<String, dynamic> mapResponse =
-      Map<String, dynamic>.from(dynamicResponse);
+
       if (response.statusCode == HttpStatus.ok ||
           response.statusCode == HttpStatus.created) {
         return const DataSuccess<void>(code: HttpStatus.ok);
       } else if (response.statusCode == HttpStatus.notFound) {
+        final dynamic dynamicResponse = jsonDecode(response.body);
+        final Map<String, dynamic> mapResponse =
+        Map<String, dynamic>.from(dynamicResponse);
         return DataFailure<String>(
             exception: mapResponse['message'], code: HttpStatus.notFound);
       } else if (response.statusCode == 401 || response.statusCode == 403) {
@@ -147,6 +148,9 @@ class CourseInstructorRepository {
             exception: 'Session expired. Login!',
             code: HttpStatus.unauthorized);
       }else if (response.statusCode == HttpStatus.badRequest) {
+        final dynamic dynamicResponse = jsonDecode(response.body);
+        final Map<String, dynamic> mapResponse =
+        Map<String, dynamic>.from(dynamicResponse);
         return DataFailure<String>(
             exception: mapResponse['message'], code: HttpStatus.badRequest);
       }

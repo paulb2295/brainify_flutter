@@ -17,6 +17,7 @@ class AdminAppBarWidget extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Theme.of(context).colorScheme.primary,
       title: const Text(
         'Brainify Admin',

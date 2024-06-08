@@ -64,6 +64,20 @@ class _CourseStudentWidgetState extends State<CourseStudentWidget> {
                         context
                             .read<CourseStudentViewModel>()
                             .enrolToCourse(widget.course);
+                        showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: const Text('Success'),
+                            content: Text('You enrolled successfully to ${widget.course.courseName}'),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('OK')),
+                            ],
+                          ),
+                        );
                       },
                     ),
                   ),

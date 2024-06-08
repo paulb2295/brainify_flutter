@@ -1,6 +1,7 @@
 import 'package:brainify_flutter/view_models/module_student_viewmodel.dart';
 import 'package:brainify_flutter/views/components/chapter_student_vector_search_widget.dart';
 import 'package:brainify_flutter/views/components/chapter_student_widget.dart';
+import 'package:brainify_flutter/views/components/exception_widget.dart';
 import 'package:brainify_flutter/views/components/module_student_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,7 @@ class _AllModulesStudentWidgetState extends State<AllModulesStudentWidget> {
     modules = context.read<ModuleStudentViewModel>().modules;
     modulesList = context.watch<ModuleStudentViewModel>().modulesState ==
             ModulesState.error
-        ? ErrorWidget(context.watch<ModuleStudentViewModel>().errorMessage)
+        ? ExceptionWidget(errorMessage:  context.watch<ModuleStudentViewModel>().errorMessage)
         : Column(
           children: [
             Padding(

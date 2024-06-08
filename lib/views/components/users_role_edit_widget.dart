@@ -112,7 +112,7 @@ class _UsersPageState extends State<UsersPage> {
                                             context: context,
                                             builder: (ctx) => AlertDialog(
                                               title: const Text('User Role Updated'),
-                                              content: Text('${user.email} has new role: ${user.role!.name}'),
+                                              content: Text('${user.email} role updated to: ${user.role!.name}'),
                                               actions: [
                                                 TextButton(
                                                     onPressed: (){
