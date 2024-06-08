@@ -44,7 +44,7 @@ class _ChapterInstructorViewState extends State<CourseInstructorAddWidget> {
           actions: [
             TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(ctx, rootNavigator: true ).pop();
                 },
                 child: const Text('I understand')),
           ],

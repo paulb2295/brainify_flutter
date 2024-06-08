@@ -107,7 +107,7 @@ class _QuestionStudentWidgetState extends State<QuestionStudentWidget> {
                 ? Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
-                      '$score/5 ',
+                      '$score/5 Correct options: ${widget.question.correctAnswers.toString()}',
                       style: TextStyle(
                           color: Theme.of(context).primaryColor, fontSize: 16),
                     ),
