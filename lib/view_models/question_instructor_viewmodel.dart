@@ -46,6 +46,7 @@ class QuestionInstructorViewModel with ChangeNotifier{
 
   void generateQuestions(Chapter chapter, int courseId, int questionNumber) async {
     _questionsGenerationState = QuestionsGenerationState.loading;
+    setGeneratedQuestions([]);
     setLoading(true);
     DataState response = await _modulesInstructorRepository.generateQuestions(
          _module!, courseId, questionNumber );
@@ -80,6 +81,8 @@ class QuestionInstructorViewModel with ChangeNotifier{
 
 
   getQuestions() async {
+    setQuestions([]);
+    _questionsState = QuestionsState.loading;
     setLoading(true);
     var response =
     await _modulesInstructorRepository.getQuestionsForModule(_module!);

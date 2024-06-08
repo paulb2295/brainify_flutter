@@ -1,7 +1,9 @@
 import 'package:brainify_flutter/view_models/course_student_viewmodel.dart';
 import 'package:brainify_flutter/views/components/course_student_widget.dart';
 import 'package:brainify_flutter/views/components/exception_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/course.dart';
@@ -33,6 +35,12 @@ class _AllCoursesStudentWidgetState extends State<AllCoursesStudentWidget> {
     return myCoursesList.any((myCourse) => myCourse.id == course.id);
   }
 
+  void _updateAllCoursesTapped() {
+    setState(() {
+      allCoursesTapped = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     myCourses = context.watch<CourseStudentViewModel>().myCourses;
@@ -51,7 +59,9 @@ class _AllCoursesStudentWidgetState extends State<AllCoursesStudentWidget> {
                     course: myCourses[index],
                     onView: () {
                       widget.onView(myCourses[index]);
-                    });
+                    },
+                  onEnroll: _updateAllCoursesTapped,
+                    );
               },
             ),
           );
@@ -73,7 +83,9 @@ class _AllCoursesStudentWidgetState extends State<AllCoursesStudentWidget> {
                         course: allCourses[index],
                         onView: () {
                           widget.onView(allCourses[index]);
-                        });
+                        },
+                      onEnroll: _updateAllCoursesTapped,
+                        );
                   },
                 ),
               )
@@ -86,28 +98,30 @@ class _AllCoursesStudentWidgetState extends State<AllCoursesStudentWidget> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                TextButton(
-                  onPressed: () async {
-                    setState(() {
-                      allCoursesTapped = false;
-                    });
-                    await context.read<CourseStudentViewModel>().getCourses('MY');
-                  },
-                  child: const Text('Cursurile Mele'),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () async {
+                      setState(() {
+                        allCoursesTapped = false;
+                      });
+                      await context.read<CourseStudentViewModel>().getCourses('MY');
+                    },
+                    child: const Text('Cursurile Mele'),
+                  ),
                 ),
-                const SizedBox(
-                  width: 10.0,
-                ),
-                TextButton(
-                  onPressed: () async {
-                    setState(() {
-                      allCoursesTapped = true;
-                    });
-                    await context.read<CourseStudentViewModel>().getCourses('ALL');
-                  },
-                  child: const Text('Toate Cursurile'),
+
+                Expanded(
+                  child: TextButton(
+                    onPressed: () async {
+                      setState(() {
+                        allCoursesTapped = true;
+                      });
+                      await context.read<CourseStudentViewModel>().getCourses('ALL');
+                    },
+                    child: const Text('Toate Cursurile'),
+                  ),
                 ),
               ],
             ),

@@ -36,6 +36,7 @@ class _ChapterStudentViewState extends State<ChapterStudentView> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     Chapter chapter = context.watch<ModuleStudentViewModel>().chapter;

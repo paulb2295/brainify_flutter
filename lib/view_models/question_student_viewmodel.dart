@@ -41,6 +41,8 @@ class QuestionStudentViewModel with ChangeNotifier{
 
 
   getQuestions() async {
+    setQuestions([]);
+    _questionsState = QuestionsState.loading;
     setLoading(true);
     var response =
     await _moduleStudentRepository.getQuestionsForModule(_module!);

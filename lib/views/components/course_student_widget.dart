@@ -10,13 +10,14 @@ class CourseStudentWidget extends StatefulWidget {
   final VoidCallback onView;
   final bool enrolled;
   final bool access;
+  final VoidCallback onEnroll;
 
   const CourseStudentWidget({
     Key? key,
     required this.course,
     required this.onView,
     required this.enrolled,
-    required this.access,
+    required this.access, required this.onEnroll,
   }) : super(key: key);
 
   @override
@@ -64,6 +65,7 @@ class _CourseStudentWidgetState extends State<CourseStudentWidget> {
                         context
                             .read<CourseStudentViewModel>()
                             .enrolToCourse(widget.course);
+                        widget.onEnroll();
                         showDialog(
                           context: context,
                           builder: (ctx) => AlertDialog(
@@ -72,7 +74,7 @@ class _CourseStudentWidgetState extends State<CourseStudentWidget> {
                             actions: [
                               TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                    Navigator.of(ctx, rootNavigator: true).pop();
                                   },
                                   child: const Text('OK')),
                             ],

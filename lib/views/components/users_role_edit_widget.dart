@@ -116,7 +116,7 @@ class _UsersPageState extends State<UsersPage> {
                                               actions: [
                                                 TextButton(
                                                     onPressed: (){
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(ctx, rootNavigator: true).pop();
                                                     },
                                                     child: const Text('OK')
                                                 ),

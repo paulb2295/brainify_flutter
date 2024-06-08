@@ -32,6 +32,7 @@ class _QuestionsPageInstructorEditState
   List<Question> editedQuestions = [];
   List<Question> questions = [];
   Widget questionsList = const LoadingWidget(message: 'Loading Questions');
+  bool saveTapped = false;
 
   @override
   void initState() {
@@ -87,15 +88,32 @@ class _QuestionsPageInstructorEditState
                 Navigator.of(context).pop();
               },
             ),
-            RoundedButton(
+            !saveTapped ? RoundedButton(
               color: Theme.of(context).primaryColor,
               title: 'Save Questions',
               onPressed: () {
                 context
                     .read<QuestionInstructorViewModel>()
                     .saveGenerateQuestions(editedQuestions);
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text('Questions Saved'),
+                    actions: [
+                      TextButton(
+                          onPressed: (){
+                            Navigator.of(ctx, rootNavigator: true).pop();
+                          },
+                          child: const Text('OK')
+                      ),
+                    ],
+                  ),
+                );
+                setState(() {
+                  saveTapped = true;
+                });
               },
-            ),
+            ) : const Text(''),
           ],
         ),
       ]),

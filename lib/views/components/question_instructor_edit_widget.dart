@@ -19,6 +19,8 @@ class _QuestionInstructorEditWidgetState extends State<QuestionInstructorEditWid
   late TextEditingController _answerDController;
   late TextEditingController _answerEController;
   late Map<String, bool> _correctAnswers;
+  bool okTapped = false;
+
 
   @override
   void initState() {
@@ -62,6 +64,10 @@ class _QuestionInstructorEditWidgetState extends State<QuestionInstructorEditWid
       correctAnswers: _correctAnswers.entries.where((entry) => entry.value).map((entry) => entry.key).toList(),
     );
     widget.onSave(updatedQuestion);
+    setState(() {
+      okTapped = true;
+    });
+
   }
 
   @override
@@ -125,10 +131,11 @@ class _QuestionInstructorEditWidgetState extends State<QuestionInstructorEditWid
               },
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _saveQuestion,
+            ElevatedButton (
+              onPressed:  !okTapped ?  _saveQuestion : null,
+
               child: const Text('Mark Question As OK'),
-            ),
+            ) ,
           ],
         ),
       ),

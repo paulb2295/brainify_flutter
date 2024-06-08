@@ -12,7 +12,8 @@ import '../../models/module.dart';
 import 'loading_widget.dart';
 
 class ChapterInstructorView extends StatefulWidget {
-  const ChapterInstructorView({super.key, required this.module, required this.course});
+  const ChapterInstructorView(
+      {super.key, required this.module, required this.course});
 
   final Module module;
   final Course course;
@@ -26,9 +27,9 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
       const LoadingWidget(message: 'Chapter content loading');
 
   final _questionsNumberController = TextEditingController();
-  void _generateQuestions(Chapter chapter){
-    if(double.tryParse(_questionsNumberController.text) == null ||
-        double.tryParse(_questionsNumberController.text)! < 1){
+  void _generateQuestions(Chapter chapter) {
+    if (double.tryParse(_questionsNumberController.text) == null ||
+        double.tryParse(_questionsNumberController.text)! < 1) {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
@@ -36,11 +37,10 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
           content: const Text('Only enter numbers greater than 0!'),
           actions: [
             TextButton(
-                onPressed: (){
+                onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('I understand')
-            ),
+                child: const Text('I understand')),
           ],
         ),
       );
@@ -49,7 +49,10 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => QuestionsPageInstructorEdit(
-          module: widget.module, chapter: chapter, courseId: widget.course.id!, questionNumber: int.parse(_questionsNumberController.text),
+          module: widget.module,
+          chapter: chapter,
+          courseId: widget.course.id!,
+          questionNumber: int.parse(_questionsNumberController.text),
         ),
       ),
     );
@@ -79,47 +82,49 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
         ? ExceptionWidget(
             errorMessage:
                 context.read<ModuleInstructorViewModel>().errorMessage)
-        : SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    chapter
-                        .title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Row(
+        : (context.read<ModuleInstructorViewModel>().modulesState ==
+                ModulesState.loading
+            ? const LoadingWidget(message: 'Loading chapter content')
+            : SingleChildScrollView(
+                child: Column(
                   children: [
-                    const Expanded(
-                      flex: 1,
-                      child: SizedBox(),
-                    ),
-                    Expanded(
-                      flex: 4,
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        chapter.content,
-                        textAlign: TextAlign.justify,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
+                        chapter.title,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
-                    const Expanded(
-                      flex: 1,
-                      child: SizedBox(),
+                    Row(
+                      children: [
+                        const Expanded(
+                          flex: 1,
+                          child: SizedBox(),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: Text(
+                            chapter.content,
+                            textAlign: TextAlign.justify,
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        const Expanded(
+                          flex: 1,
+                          child: SizedBox(),
+                        )
+                      ],
                     )
                   ],
-                )
-              ],
-            ),
-          );
+                ),
+              ));
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
       child: Column(
@@ -167,7 +172,9 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
                   ),
                 ),
               ),
-              const SizedBox(width: 14,),
+              const SizedBox(
+                width: 14,
+              ),
               RoundedButton(
                 color: Theme.of(context).primaryColor,
                 title: 'Generate questions',

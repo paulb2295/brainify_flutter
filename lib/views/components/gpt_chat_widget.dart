@@ -119,7 +119,7 @@ class _ChatPageState extends State<ChatPage> {
                 const SizedBox(width: 8),
                 IconButton(
                   onPressed: _sendMessage,
-                  icon: context.watch<GptViewModel>().loading
+                  icon: context.watch<GptViewModel>().chatState == ChatState.loading
                       ? CupertinoActivityIndicator(
                     color: Theme.of(context).colorScheme.primary,
                   )

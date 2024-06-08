@@ -321,13 +321,14 @@ class ModulesInstructorRepository {
             'Authorization': 'Bearer $token'
           },
           body: json.encode(questionList));
-      final dynamic dynamicResponse = jsonDecode(response.body);
-      final Map<String, dynamic> mapResponse =
-      Map<String, dynamic>.from(dynamicResponse);
+
       if (response.statusCode == HttpStatus.ok ||
           response.statusCode == HttpStatus.created) {
         return const DataSuccess<void>(code: HttpStatus.ok);
       } else if (response.statusCode == HttpStatus.badRequest) {
+        final dynamic dynamicResponse = jsonDecode(response.body);
+        final Map<String, dynamic> mapResponse =
+        Map<String, dynamic>.from(dynamicResponse);
         return DataFailure<String>(
             exception: mapResponse['message'], code: HttpStatus.badRequest);
       }

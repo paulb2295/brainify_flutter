@@ -14,11 +14,12 @@ class QuestionsPageInstructorView extends StatefulWidget {
   final Module module;
 
   @override
-  State<QuestionsPageInstructorView> createState() => _QuestionsPageInstructorViewState();
+  State<QuestionsPageInstructorView> createState() =>
+      _QuestionsPageInstructorViewState();
 }
 
-class _QuestionsPageInstructorViewState extends State<QuestionsPageInstructorView> {
-
+class _QuestionsPageInstructorViewState
+    extends State<QuestionsPageInstructorView> {
   List<Question> questions = [];
   Widget questionsList = const LoadingWidget(message: 'Loading Questions');
 
@@ -27,44 +28,45 @@ class _QuestionsPageInstructorViewState extends State<QuestionsPageInstructorVie
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<QuestionInstructorViewModel>().initialize(widget.module);
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
     questions = context.watch<QuestionInstructorViewModel>().questions;
-    questionsList = context.read<QuestionInstructorViewModel>().questionState == QuestionsState.error?
-    ExceptionWidget(
-      errorMessage:  context.read<QuestionInstructorViewModel>().errorMessage,
-    ) :
-    ListView.builder(
-      itemCount: questions.length,
-      itemBuilder: (context, index){
-        return QuestionInstructorWidget(
-          question: questions[index],
-        );
-      },
-    );
+    questionsList = context.read<QuestionInstructorViewModel>().questionState ==
+            QuestionsState.error
+        ? ExceptionWidget(
+            errorMessage:
+                context.read<QuestionInstructorViewModel>().errorMessage,
+          )
+        : (context.read<QuestionInstructorViewModel>().questionState ==
+                QuestionsState.loading
+            ? const LoadingWidget(message: 'Loading Questions')
+            : ListView.builder(
+                itemCount: questions.length,
+                itemBuilder: (context, index) {
+                  return QuestionInstructorWidget(
+                    question: questions[index],
+                  );
+                },
+              ));
     return Scaffold(
-      body: Column(
-          children :
-          [
-            Expanded(child: questionsList),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RoundedButton(
-                  color: Theme.of(context).primaryColor,
-                  title: 'Back',
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+      body: Column(children: [
+        Expanded(child: questionsList),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            RoundedButton(
+              color: Theme.of(context).primaryColor,
+              title: 'Back',
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
-          ]
-      ),
+          ],
+        ),
+      ]),
     );
   }
 }

@@ -84,7 +84,7 @@ class _AllModulesStudentWidgetState extends State<AllModulesStudentWidget> {
                         _openVectorSearchChapterOverlay(chapter);
                       }
                     },
-                    icon: context.watch<GptViewModel>().loading
+                    icon: context.watch<GptViewModel>().gptState == GPTState.loading
                         ? CupertinoActivityIndicator(
                       color: Theme.of(context).colorScheme.primary,
                     )

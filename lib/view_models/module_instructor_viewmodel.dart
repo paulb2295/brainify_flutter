@@ -80,6 +80,8 @@ class ModuleInstructorViewModel with ChangeNotifier {
 
   //*************
   getChapterForModule(Module module) async {
+    setChapter(Chapter(title: '', content: ''));
+    _modulesState = ModulesState.loading;
     setLoading(true);
     var response =
         await _modulesInstructorRepository.getChapterForModule(module);

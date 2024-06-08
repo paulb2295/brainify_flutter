@@ -70,6 +70,7 @@ class CourseStudentViewModel with ChangeNotifier {
 
   enrolToCourse(Course course) async{
     var response = await _courseStudentRepository.enrollToCourse(course);
+    getCourses();
     if (response is DataSuccess) {
       _coursesState = CoursesState.success;
     } else if (response is DataFailure) {
