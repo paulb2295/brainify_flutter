@@ -118,31 +118,29 @@ class _ChapterInstructorViewState extends State<ModuleInstructorEditWidget> {
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    const Expanded(
-                      flex: 1,
-                      child: SizedBox(),
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: TextField(
-                        controller: _contentController,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                        decoration: const InputDecoration(
-                          label: Text('Chapter Content'),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                    height: 400,
+                    child: TextField(
+                      controller: _contentController,
+                      maxLines: null,
+                      expands: true,
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                      decoration: const InputDecoration(
+                        label: Text(
+                          'Chapter Content',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ),
-                    const Expanded(
-                      flex: 1,
-                      child: SizedBox(),
-                    )
-                  ],
-                )
+                  ),
+                ),
               ],
             ),
           );

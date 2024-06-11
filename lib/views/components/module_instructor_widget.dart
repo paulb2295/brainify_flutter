@@ -39,7 +39,7 @@ class ModuleInstructorWidget extends StatelessWidget {
             ),
             const SizedBox(width: 16.0),
             Tooltip(
-              message: 'Add Chapter content',
+              message: 'Edit Chapter content',
               child: IconButton(
                 icon: const Icon(Icons.edit, color: Colors.blueAccent),
                 onPressed: onEdit,
