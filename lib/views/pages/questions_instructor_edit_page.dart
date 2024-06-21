@@ -31,7 +31,7 @@ class _QuestionsPageInstructorEditState
     extends State<QuestionsPageInstructorEdit> {
   List<Question> editedQuestions = [];
   List<Question> questions = [];
-  Widget questionsList = const LoadingWidget(message: 'Loading Questions');
+  Widget questionsList = const LoadingWidget(message: 'Întrebările se încarcă');
   bool saveTapped = false;
 
   @override
@@ -63,7 +63,7 @@ class _QuestionsPageInstructorEditState
                         .read<QuestionInstructorViewModel>()
                         .questionGenerationState ==
                     QuestionsGenerationState.loading
-                ? const LoadingWidget(message: 'Generating Questions')
+                ? const LoadingWidget(message: 'Se generează întrebările')
                 : ListView.builder(
                     itemCount: questions.length,
                     itemBuilder: (context, index) {
@@ -83,14 +83,14 @@ class _QuestionsPageInstructorEditState
           children: [
             RoundedButton(
               color: Theme.of(context).primaryColor,
-              title: 'Back',
+              title: 'Înapoi',
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             !saveTapped ? RoundedButton(
               color: Theme.of(context).primaryColor,
-              title: 'Save Questions',
+              title: 'Salvează Întrebările',
               onPressed: () {
                 context
                     .read<QuestionInstructorViewModel>()
@@ -98,7 +98,7 @@ class _QuestionsPageInstructorEditState
                 showDialog(
                   context: context,
                   builder: (ctx) => AlertDialog(
-                    title: const Text('Questions Saved'),
+                    title: const Text('Întrebările au fost salvate cu succes!'),
                     actions: [
                       TextButton(
                           onPressed: (){

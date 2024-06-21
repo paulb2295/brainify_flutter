@@ -107,7 +107,7 @@ class _QuestionStudentWidgetState extends State<QuestionStudentWidget> {
                 ? Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
-                      '$score/5 Correct options: ${widget.question.correctAnswers.toString()}',
+                      '$score/5 Variante Corecte: ${widget.question.correctAnswers.toString()}',
                       style: TextStyle(
                           color: Theme.of(context).primaryColor, fontSize: 16),
                     ),
@@ -182,7 +182,7 @@ class _QuestionStudentWidgetState extends State<QuestionStudentWidget> {
                       });
                     }
                   : null,
-              child: const Text('Submit Question'),
+              child: const Text('Verifică Răspunsurile'),
             ),
           ],
         ),

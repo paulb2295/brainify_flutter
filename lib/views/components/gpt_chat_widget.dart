@@ -61,7 +61,7 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 231, 233, 235),
       body: context.watch<GptViewModel>().chatState == ChatState.loading ?
-      const LoadingWidget(message: 'Generating Response') :
+      const LoadingWidget(message: 'Se generează răspunsul') :
       Column(
         children: [
           Expanded(
@@ -111,7 +111,7 @@ class _ChatPageState extends State<ChatPage> {
                     ),
                     controller: _controller,
                     decoration: const InputDecoration(
-                      hintText: 'Enter your message',
+                      hintText: 'Mesajul tău',
                       border: OutlineInputBorder(),
                     ),
                   ),

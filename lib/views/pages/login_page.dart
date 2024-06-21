@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   TextField(
                     decoration:
-                        const InputDecoration(hintText: 'your@email.com'),
+                        const InputDecoration(hintText: 'email@mail.com'),
                     onChanged: (value) {
                       email = value;
                     },
@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 8.0,
                   ),
                   TextField(
-                    decoration: const InputDecoration(hintText: 'password'),
+                    decoration: const InputDecoration(hintText: 'parolă'),
                     onChanged: (value) {
                       password = value;
                     },
@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }),
                   RoundedButton(
                       color: Theme.of(context).colorScheme.primary,
-                      title: 'Don\'t have an account? Register',
+                      title: 'Nu ai cont? Înregistrează-te',
                       onPressed: () async {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (ctx) => const RegisterScreen()));

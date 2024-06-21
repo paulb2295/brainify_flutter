@@ -26,7 +26,7 @@ class AllModulesStudentWidget extends StatefulWidget {
 
 class _AllModulesStudentWidgetState extends State<AllModulesStudentWidget> {
   List<Module> modules = [];
-  Widget modulesList = const LoadingWidget(message: 'Loading Courses');
+  Widget modulesList = const LoadingWidget(message: 'Capitolele se încarcă');
   final TextEditingController _controller = TextEditingController();
 
   void _openAddChapterOverlay(Module module) {
@@ -70,7 +70,7 @@ class _AllModulesStudentWidgetState extends State<AllModulesStudentWidget> {
                       ),
                       controller: _controller,
                       decoration:  const InputDecoration(
-                        hintText: 'Chapter Search',
+                        hintText: 'Caută capitol',
                         border: OutlineInputBorder(),
                       ),
                     ),

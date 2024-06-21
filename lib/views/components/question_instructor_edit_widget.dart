@@ -134,7 +134,7 @@ class _QuestionInstructorEditWidgetState extends State<QuestionInstructorEditWid
             ElevatedButton (
               onPressed:  !okTapped ?  _saveQuestion : null,
 
-              child: const Text('Mark Question As OK'),
+              child: const Text('Validează Întrebare'),
             ) ,
           ],
         ),

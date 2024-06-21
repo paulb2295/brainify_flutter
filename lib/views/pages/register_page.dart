@@ -70,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 48.0,
                   ),
                   TextField(
-                    decoration: const InputDecoration(hintText: 'your@mail.com'),
+                    decoration: const InputDecoration(hintText: 'email@mail.com'),
                     onChanged: (value) {
                       email = value;
                     },
@@ -80,7 +80,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 8.0,
                   ),
                   TextField(
-                    decoration: const InputDecoration(hintText: 'password'),
+                    decoration: const InputDecoration(hintText: 'parolă'),
                     onChanged: (value) {
                       password = value;
                     },
@@ -91,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 8.0,
                   ),
                   TextField(
-                    decoration: const InputDecoration(hintText: 'First Name'),
+                    decoration: const InputDecoration(hintText: 'Prenume'),
                     onChanged: (value) {
                       firstname = value;
                     },
@@ -101,7 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 8.0,
                   ),
                   TextField(
-                    decoration: const InputDecoration(hintText: 'Last Name'),
+                    decoration: const InputDecoration(hintText: 'Nume'),
                     onChanged: (value) {
                       lastname = value;
                     },
@@ -112,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   RoundedButton(
                       color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      title: 'Register',
+                      title: 'Înregistrează-te',
                       onPressed: () async {
                         RegisterRequest req = RegisterRequest(
                             email: email,
@@ -148,7 +148,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       }),
                   RoundedButton(
                       color: Theme.of(context).colorScheme.primary,
-                      title: 'Already have an account? Login',
+                      title: 'Ai deja cont? LogIn',
                       onPressed: () async {
                         Navigator.of(context).pop();
                       }),

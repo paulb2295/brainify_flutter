@@ -42,7 +42,7 @@ class _QuestionsPageInstructorViewState
           )
         : (context.read<QuestionInstructorViewModel>().questionState ==
                 QuestionsState.loading
-            ? const LoadingWidget(message: 'Loading Questions')
+            ? const LoadingWidget(message: 'Întrebările se încarcă')
             : ListView.builder(
                 itemCount: questions.length,
                 itemBuilder: (context, index) {
@@ -59,7 +59,7 @@ class _QuestionsPageInstructorViewState
           children: [
             RoundedButton(
               color: Theme.of(context).primaryColor,
-              title: 'Back',
+              title: 'Înapoi',
               onPressed: () {
                 Navigator.of(context).pop();
               },

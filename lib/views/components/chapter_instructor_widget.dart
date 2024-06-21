@@ -24,7 +24,7 @@ class ChapterInstructorView extends StatefulWidget {
 
 class _ChapterInstructorViewState extends State<ChapterInstructorView> {
   Widget displayChapter =
-      const LoadingWidget(message: 'Chapter content loading');
+      const LoadingWidget(message: 'Conținutul capitolului se încarcă');
 
   final _questionsNumberController = TextEditingController();
   void _generateQuestions(Chapter chapter) {
@@ -33,14 +33,14 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('Invalid amount'),
-          content: const Text('Only enter numbers greater than 0!'),
+          title: const Text('Număr invalid'),
+          content: const Text('Introduceți numere mai mari decât 0!'),
           actions: [
             TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('I understand')),
+                child: const Text('Am Înțeles')),
           ],
         ),
       );
@@ -84,7 +84,7 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
                 context.read<ModuleInstructorViewModel>().errorMessage)
         : (context.read<ModuleInstructorViewModel>().modulesState ==
                 ModulesState.loading
-            ? const LoadingWidget(message: 'Loading chapter content')
+            ? const LoadingWidget(message: 'Conținutul cursului se încarcă')
             : SingleChildScrollView(
                 child: Column(
                   children: [
@@ -135,7 +135,7 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
             children: [
               RoundedButton(
                 color: Theme.of(context).primaryColor,
-                title: 'Back',
+                title: 'Înapoi',
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -145,7 +145,7 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
               ),
               RoundedButton(
                 color: Theme.of(context).primaryColor,
-                title: 'See Questions',
+                title: 'Vezi Întrebările',
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -167,7 +167,7 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
                   keyboardType: TextInputType.number,
                   maxLength: 3,
                   decoration: const InputDecoration(
-                    label: Text('Number of questions to generate'),
+                    label: Text('Numărul întrebărilor de generat'),
                     prefixText: 'Q: ',
                   ),
                 ),
@@ -177,7 +177,7 @@ class _ChapterInstructorViewState extends State<ChapterInstructorView> {
               ),
               RoundedButton(
                 color: Theme.of(context).primaryColor,
-                title: 'Generate questions',
+                title: 'Generează Întrebări',
                 onPressed: () {
                   _generateQuestions(chapter);
                 },

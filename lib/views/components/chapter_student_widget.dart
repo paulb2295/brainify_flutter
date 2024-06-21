@@ -23,7 +23,7 @@ class ChapterStudentView extends StatefulWidget {
 
 class _ChapterStudentViewState extends State<ChapterStudentView> {
   Widget displayChapter =
-      const LoadingWidget(message: 'Chapter content loading');
+      const LoadingWidget(message: 'Conținutul capitolului se încarcă');
 
   bool summarizeTapped = false;
   Chapter summarizedChapter = Chapter(title: '', content: '');
@@ -48,7 +48,7 @@ class _ChapterStudentViewState extends State<ChapterStudentView> {
         : (context.read<GptViewModel>().summarizeState == SummarizeState.loading ||
                 context.read<ModuleStudentViewModel>().modulesState ==
                     ModulesState.loading
-            ? const LoadingWidget(message: 'Loading chapter')
+            ? const LoadingWidget(message: 'Capitolul se încarcă')
             : SingleChildScrollView(
                 child: Column(
                   children: [
@@ -95,7 +95,7 @@ class _ChapterStudentViewState extends State<ChapterStudentView> {
         ? ExceptionWidget(
             errorMessage: context.read<ModuleStudentViewModel>().errorMessage)
         : (context.read<GptViewModel>().gptState == GPTState.loading
-            ? const LoadingWidget(message: 'Generating summarized version')
+            ? const LoadingWidget(message: 'Se generează varianta sumarizată')
             : SingleChildScrollView(
                 child: Column(
                   children: [
@@ -162,7 +162,7 @@ class _ChapterStudentViewState extends State<ChapterStudentView> {
                   : ( context.watch<GptViewModel>().summarizeState == SummarizeState.success?
                   RoundedButton(
                       color: Theme.of(context).primaryColor,
-                      title: 'Original Version',
+                      title: 'Versiunea Originală',
                       onPressed: (){
                         setState(() {
                           summarizeTapped =false;
@@ -172,7 +172,7 @@ class _ChapterStudentViewState extends State<ChapterStudentView> {
                   ):
                   RoundedButton(
                       color: Theme.of(context).primaryColor,
-                      title: 'Summarize',
+                      title: 'Sumarizează Capitolul',
                       onPressed: () async {
                         await context
                             .read<GptViewModel>()
@@ -189,7 +189,7 @@ class _ChapterStudentViewState extends State<ChapterStudentView> {
               const SizedBox(width: 4,),
               RoundedButton(
                 color: Theme.of(context).primaryColor,
-                title: 'Test Yourself',
+                title: 'Testează-te',
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(

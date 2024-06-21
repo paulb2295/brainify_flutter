@@ -72,14 +72,14 @@ class _UsersPageState extends State<UsersPage> {
                                     ),
                                   ),
                                   Text(
-                                      'First Name: ${user.firstName}',
+                                      'Prenume: ${user.firstName}',
                                     style: TextStyle(
                                         fontSize: 16,
                                         color: Theme.of(context).colorScheme.primary,
                                     ),
                                   ),
                                   Text(
-                                      'Last Name: ${user.lastName}',
+                                      'Nume: ${user.lastName}',
                                     style: TextStyle(
                                         fontSize: 16,
                                         color: Theme.of(context).colorScheme.primary,
@@ -111,8 +111,8 @@ class _UsersPageState extends State<UsersPage> {
                                           showDialog(
                                             context: context,
                                             builder: (ctx) => AlertDialog(
-                                              title: const Text('User Role Updated'),
-                                              content: Text('${user.email} role updated to: ${user.role!.name}'),
+                                              title: const Text('Rolul utilizatorului a fost schimbat'),
+                                              content: Text('${user.email} cu rolul nou de: ${user.role!.name}'),
                                               actions: [
                                                 TextButton(
                                                     onPressed: (){
@@ -125,7 +125,7 @@ class _UsersPageState extends State<UsersPage> {
                                           );
                                         },
                                         color: const Color.fromARGB(255, 40, 42, 53),
-                                        title: 'Save',
+                                        title: 'Salvează',
                                       ),
                                     ],
                                   ),
@@ -146,7 +146,7 @@ class _UsersPageState extends State<UsersPage> {
                       Navigator.of(context).pop();
                     },
                     color: Theme.of(context).primaryColor,
-                    title: 'Back',
+                    title: 'Înapoi',
                   ),
                 ),
               ],

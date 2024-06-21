@@ -47,7 +47,7 @@ class _CourseStudentWidgetState extends State<CourseStudentWidget> {
             const SizedBox(width: 16.0),
             widget.access
                 ? Tooltip(
-                    message: 'View Course Chapters',
+                    message: 'Vezi Capitolele Cursului',
                     child: IconButton(
                       icon: const Icon(Icons.visibility, color: Colors.green),
                       onPressed: widget.onView,
@@ -57,7 +57,7 @@ class _CourseStudentWidgetState extends State<CourseStudentWidget> {
             widget.enrolled
                 ? const Text('')
                 : Tooltip(
-                    message: 'Enroll',
+                    message: 'Înscrie-te La Curs',
                     child: IconButton(
                       icon: const Icon(Icons.add_box_sharp,
                           color: Colors.blueAccent),
@@ -69,8 +69,8 @@ class _CourseStudentWidgetState extends State<CourseStudentWidget> {
                         showDialog(
                           context: context,
                           builder: (ctx) => AlertDialog(
-                            title: const Text('Success'),
-                            content: Text('You enrolled successfully to ${widget.course.courseName}'),
+                            title: const Text('Succes'),
+                            content: Text('Te-ai înscris cu succes la ${widget.course.courseName}'),
                             actions: [
                               TextButton(
                                   onPressed: () {

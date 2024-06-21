@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:brainify_flutter/views/components/rounded_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +23,7 @@ class ModuleInstructorAddWidget extends StatefulWidget {
 
 class _ChapterInstructorViewState extends State<ModuleInstructorAddWidget> {
   Widget displayChapter =
-      const LoadingWidget(message: 'Chapter content loading');
+      const LoadingWidget(message: 'Conținutul capitolului se încarcă');
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
@@ -49,14 +51,14 @@ class _ChapterInstructorViewState extends State<ModuleInstructorAddWidget> {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('Invalid Chapter Title'),
-          content: const Text('Enter at least one alpha-numeric character!'),
+          title: const Text('Titlu Invalid'),
+          content: const Text('Introduceți caractere alfa-numerice!'),
           actions: [
             TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(ctx, rootNavigator: true).pop();
                 },
-                child: const Text('I understand')),
+                child: const Text('Am înțeles')),
           ],
         ),
       );
@@ -66,14 +68,14 @@ class _ChapterInstructorViewState extends State<ModuleInstructorAddWidget> {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('Invalid Chapter Content'),
-          content: const Text('Enter at least one alpha-numeric character!'),
+          title: const Text('Conținut invalid'),
+          content: const Text('Introduceți caractere alfa-numerice!'),
           actions: [
             TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(ctx, rootNavigator: true).pop();
                 },
-                child: const Text('I understand')),
+                child: const Text('Am înteles')),
           ],
         ),
       );
@@ -102,7 +104,7 @@ class _ChapterInstructorViewState extends State<ModuleInstructorAddWidget> {
                   fontWeight: FontWeight.bold),
               maxLength: 200,
               decoration: const InputDecoration(
-                label: Text('Chapter Title'),
+                label: Text('Titlul Capitolului'),
               ),
             ),
           ),
@@ -120,7 +122,7 @@ class _ChapterInstructorViewState extends State<ModuleInstructorAddWidget> {
                     fontWeight: FontWeight.w400),
                 decoration: const InputDecoration(
                   label: Text(
-                    'Chapter Content',
+                    'Conținutul Capitolului',
                     style: TextStyle(
                       fontSize: 16,
                     ),
@@ -142,7 +144,7 @@ class _ChapterInstructorViewState extends State<ModuleInstructorAddWidget> {
             children: [
               RoundedButton(
                 color: Theme.of(context).primaryColor,
-                title: 'Back',
+                title: 'Înapoi',
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -152,7 +154,7 @@ class _ChapterInstructorViewState extends State<ModuleInstructorAddWidget> {
               ),
               RoundedButton(
                 color: Theme.of(context).primaryColor,
-                title: 'Save New Chapter',
+                title: 'Salvează Capitolul Nou',
                 onPressed: () {
                   _submitEditedChapterData();
                 },

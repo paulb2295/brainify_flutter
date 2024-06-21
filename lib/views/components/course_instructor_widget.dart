@@ -45,21 +45,21 @@ class CourseInstructorWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Tooltip(
-                    message: 'Add Chapters',
+                    message: 'Adaugă capitole',
                     child: IconButton(
                       icon: const Icon(Icons.add, color: Colors.blueAccent),
                       onPressed: onEdit,
                     ),
                   ),
                   Tooltip(
-                    message: 'Delete Course',
+                    message: 'Șterge cursul',
                     child: IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: onDelete,
                     ),
                   ),
                   Tooltip(
-                    message: 'View Course Chapters',
+                    message: 'Vezi Capitolele Cursului',
                     child: IconButton(
                       icon: const Icon(Icons.visibility, color: Colors.green),
                       onPressed: onView,

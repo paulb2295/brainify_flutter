@@ -23,7 +23,7 @@ class _QuestionsPageStudentState extends State<QuestionsPageStudent> {
   Map<int, int> questionScores = {};
   int totalScore = 0;
   bool calculatePressed = false;
-  Widget questionsList = const LoadingWidget(message: 'Loading Questions');
+  Widget questionsList = const LoadingWidget(message: 'Întrebările se încarcă');
 
   @override
   void initState() {
@@ -52,7 +52,7 @@ class _QuestionsPageStudentState extends State<QuestionsPageStudent> {
         ? ErrorWidget(context.read<QuestionStudentViewModel>().errorMessage)
         : (context.read<QuestionStudentViewModel>().questionState ==
                 QuestionsState.loading
-            ? const LoadingWidget(message: 'Loading Questions')
+            ? const LoadingWidget(message: 'Întrebările se încarcă')
             : ListView.builder(
                 itemCount: questions.length,
                 itemBuilder: (context, index) {
@@ -70,7 +70,7 @@ class _QuestionsPageStudentState extends State<QuestionsPageStudent> {
             padding: const EdgeInsets.all(12.0),
             child: Text(
               calculatePressed
-                  ? 'Total Score: $totalScore/${questions.length * 5}'
+                  ? 'Scor Total: $totalScore/${questions.length * 5}'
                   : '',
               style: TextStyle(
                 fontSize: 18.0,
@@ -85,14 +85,14 @@ class _QuestionsPageStudentState extends State<QuestionsPageStudent> {
             children: [
               RoundedButton(
                 color: Theme.of(context).primaryColor,
-                title: 'Back',
+                title: 'Înapoi',
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               RoundedButton(
                 color: Theme.of(context).primaryColor,
-                title: 'Get Score',
+                title: 'Vezi rezultat final',
                 onPressed: () {
                   totalScore = _calculateTotalScore();
                   setState(() {

@@ -39,21 +39,21 @@ class ModuleInstructorWidget extends StatelessWidget {
             ),
             const SizedBox(width: 16.0),
             Tooltip(
-              message: 'Edit Chapter content',
+              message: 'Editează Capitolul',
               child: IconButton(
                 icon: const Icon(Icons.edit, color: Colors.blueAccent),
                 onPressed: onEdit,
               ),
             ),
             Tooltip(
-              message: 'Delete Chapter',
+              message: 'Șterge Capitolul',
               child: IconButton(
                 icon: const Icon(Icons.delete, color: Colors.red),
                 onPressed: onDelete,
               ),
             ),
             Tooltip(
-              message: 'View Chapter content',
+              message: 'Vezi Conținutul Capitolului',
               child: IconButton(
                 icon: const Icon(Icons.visibility, color: Colors.green),
                 onPressed: onView,

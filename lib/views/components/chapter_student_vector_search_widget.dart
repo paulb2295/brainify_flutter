@@ -17,7 +17,7 @@ class ChapterStudentVectorSearchView extends StatefulWidget {
 
 class _ChapterStudentVectorSearchViewState extends State<ChapterStudentVectorSearchView> {
   Widget displayChapter =
-      const LoadingWidget(message: 'Chapter content loading');
+      const LoadingWidget(message: 'Conținutul capitolului se încarcă');
 
   @override
   void initState() {
@@ -83,7 +83,7 @@ class _ChapterStudentVectorSearchViewState extends State<ChapterStudentVectorSea
             children: [
               RoundedButton(
                 color: Theme.of(context).primaryColor,
-                title: 'Back',
+                title: 'Înapoi',
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

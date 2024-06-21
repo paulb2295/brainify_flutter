@@ -21,8 +21,8 @@ class AllCoursesStudentWidget extends StatefulWidget {
 class _AllCoursesStudentWidgetState extends State<AllCoursesStudentWidget> {
   List<Course> myCourses = [];
   List<Course> allCourses = [];
-  Widget coursesList = const LoadingWidget(message: 'Loading Courses');
-  Widget allCoursesList = const LoadingWidget(message: 'Loading Courses');
+  Widget coursesList = const LoadingWidget(message: 'Cursurile se încarcă');
+  Widget allCoursesList = const LoadingWidget(message: 'Cursurile se încarcă');
   bool allCoursesTapped = false;
 
   @override
@@ -89,7 +89,7 @@ class _AllCoursesStudentWidgetState extends State<AllCoursesStudentWidget> {
                   },
                 ),
               )
-            : const LoadingWidget(message: 'Loading Courses'));
+            : const LoadingWidget(message: 'Cursurile se încarcă'));
 
     return Column(
       children: [

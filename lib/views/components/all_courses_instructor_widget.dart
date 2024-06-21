@@ -22,7 +22,7 @@ class AllCoursesInstructorWidget extends StatefulWidget {
 class _AllCoursesInstructorWidgetState
     extends State<AllCoursesInstructorWidget> {
   List<Course> courses = [];
-  Widget coursesList = const LoadingWidget(message: 'Loading Courses');
+  Widget coursesList = const LoadingWidget(message: 'Cursurile se încarcă');
 
   void _openAddChapterOverlay(Course course) {
     showModalBottomSheet(

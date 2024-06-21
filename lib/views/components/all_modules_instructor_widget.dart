@@ -27,7 +27,7 @@ class AllModulesInstructorWidget extends StatefulWidget {
 class _AllModulesInstructorWidgetState
     extends State<AllModulesInstructorWidget> {
   List<Module> modules = [];
-  Widget modulesList = const LoadingWidget(message: 'Loading Modules');
+  Widget modulesList = const LoadingWidget(message: 'Capitolele se încarcă');
 
   void _openChapterOverlay(Module module) {
     showModalBottomSheet(

@@ -15,7 +15,7 @@ class CourseInstructorAddWidget extends StatefulWidget {
 
 class _ChapterInstructorViewState extends State<CourseInstructorAddWidget> {
   Widget displayCourse =
-      const LoadingWidget(message: 'Chapter content loading');
+      const LoadingWidget(message: 'Conținutul capitolului se încarcă');
 
   final TextEditingController _titleController = TextEditingController();
 
@@ -39,14 +39,14 @@ class _ChapterInstructorViewState extends State<CourseInstructorAddWidget> {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('Invalid Course Title'),
-          content: const Text('Enter at least one alpha-numeric character!'),
+          title: const Text('Titlu invalid'),
+          content: const Text('Introduceți caractere alfa-numerice!'),
           actions: [
             TextButton(
                 onPressed: () {
                   Navigator.of(ctx, rootNavigator: true ).pop();
                 },
-                child: const Text('I understand')),
+                child: const Text('Am înțeles')),
           ],
         ),
       );
@@ -75,8 +75,8 @@ class _ChapterInstructorViewState extends State<CourseInstructorAddWidget> {
                   fontWeight: FontWeight.bold),
               maxLength: 200,
               decoration: const InputDecoration(
-                label: Text('Course Title'),
-                hintText: 'Course Title'
+                label: Text('Titlul Cursului'),
+                hintText: 'Titlul Cursului'
               ),
             ),
           ),
@@ -85,7 +85,7 @@ class _ChapterInstructorViewState extends State<CourseInstructorAddWidget> {
             children: [
               RoundedButton(
                 color: Theme.of(context).primaryColor,
-                title: 'Back',
+                title: 'Înapoi',
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -95,7 +95,7 @@ class _ChapterInstructorViewState extends State<CourseInstructorAddWidget> {
               ),
               RoundedButton(
                 color: Theme.of(context).primaryColor,
-                title: 'Save New Course',
+                title: 'Salvează cursul nou',
                 onPressed: () {
                   _submitNewCourseData();
                 },
